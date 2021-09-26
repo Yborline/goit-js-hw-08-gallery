@@ -13,9 +13,7 @@
 <body>
     <!-- В этот список добавляй элементы галереи -->
     <ul class="gallery js-gallery"></ul>
-        <svg class="icons">
-            <use href="./icone-close.svg#icon-close"></use>
-        </svg>
+
     <!--./images/icons-list/sprite.svg.svg #icon-close"
       Модальное окно для полноразмерного изображения
       Для того чтобы открыть, необходимо добавить на div.lightbox CSS-класс is-open
@@ -27,9 +25,11 @@
             <img class="lightbox__image" src="" alt="" />
         </div>
 
-        <button type="button" class="lightbox__button" data-action="close-lightbox"><svg class="icons">
-            <use href="./icone-close.svg#icon-close"></use>
-        </svg></button>
+        <button type="button" class="lightbox__button" data-action="close-lightbox">
+            <svg class="icons">
+            <use href="./icone-close.svg"></use>
+        </svg>
+    </button>
     </div>
 
     <script src="js.js" type="module"></script>

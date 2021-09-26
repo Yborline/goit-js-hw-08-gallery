@@ -85,7 +85,7 @@ function createGalleryList(item) {
   >
     <img
       class="gallery__image"
-      src="${preview}"
+      // src="${preview}"
       data-source="${original}"
       alt="${description}"
     />
@@ -95,5 +95,17 @@ function createGalleryList(item) {
         })
         .join('');
 }
+
+gallerylistEl.addEventListener('click', onImageClick);
+
+function onImageClick(evt) {
+
+  if (!evt.target.classList.contains('gallery__image')) {
+    return;
+  }
+  console.log(evt.target);
+  
+}
+
 
   
