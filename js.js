@@ -67,10 +67,10 @@ const galleryItems = [
 
 
 const gallerylistEl = document.querySelector('.js-gallery');
-console.log(gallerylistEl);
+// console.log(gallerylistEl);
 
 const galleryMarkup = createGalleryList(galleryItems);
-console.log(galleryMarkup);
+// console.log(galleryMarkup);
 
 gallerylistEl.insertAdjacentHTML( 'beforeend', galleryMarkup);
 
@@ -85,7 +85,7 @@ function createGalleryList(item) {
   >
     <img
       class="gallery__image"
-      // src="${preview}"
+      src="${preview}"
       data-source="${original}"
       alt="${description}"
     />
@@ -96,16 +96,74 @@ function createGalleryList(item) {
         .join('');
 }
 
+
+
+
+
+
+const divBoxEl = document.querySelector('.js-lightbox');
+const imgEl = document.querySelector('img.lightbox__image')
+ 
+
+
+
 gallerylistEl.addEventListener('click', onImageClick);
 
-function onImageClick(evt) {
 
-  if (!evt.target.classList.contains('gallery__image')) {
-    return;
+
+
+// divBoxEl.addEventListener('click', onOpenModal);
+  
+
+
+// function changeSrcImg(evt) {
+  
+
+  
+// }
+
+function onImageClick(evt) {
+  if (evt.target.nodeName !== 'IMG') {
+    return ;
   }
-  console.log(evt.target);
+ evt.target.setAttribute('src' , evt.target.getAttribute(['data-source']))
+
+  evt.target.src = ''; 
+
+  divBoxEl.classList.add('is-open');
+
   
 }
 
+// function onOpenModal(evt) {
 
+//   evt.currentTarget.classList.add('is-open');
+
+// }
+
+
+
+// function onImageClick(evt) {
+// const isGalleryImageEl = evt.target.classList.contains('gallery__image');
+
+//   if (!isGalleryImageEl) {
+//     return   ;
+//   }
+//   console.log(evt.target);
+  
+// }
+
+
+
+
+// const buttonCloseEl = document.querySelector('[data-action="close-lightbox"]');
+// const backdropEl = document.querySelector('.lightbox__overlay ');
+// const imgOpenEl = gallerylistEl.querySelector('img');
+  // const divBoxEl = document.querySelector('.js-lightbox');
+
+// addEventListener('click', onOpenModal);
+// function onOpenModal() {
+
+//   document.divBoxEl.classList.add('is-open');
+// }
   
