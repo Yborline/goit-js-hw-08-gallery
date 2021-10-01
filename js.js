@@ -96,7 +96,8 @@ document.addEventListener('keydown', (evt) => {
     onCloseModalClick()
   }
 })
-const slideImgEl = document.querySelector('.lightbox__content');
+
+
 
 document.addEventListener('keydown', (evt) => {
   console.log(evt);
