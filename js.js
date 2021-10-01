@@ -1,69 +1,4 @@
-const galleryItems = [
-  {
-    preview:
-      'https://cdn.pixabay.com/photo/2019/05/14/16/43/himilayan-blue-poppy-4202825__340.jpg',
-    original:
-      'https://cdn.pixabay.com/photo/2019/05/14/16/43/himilayan-blue-poppy-4202825_1280.jpg',
-    description: 'Hokkaido Flower',
-  },
-  {
-    preview:
-      'https://cdn.pixabay.com/photo/2019/05/14/22/05/container-4203677__340.jpg',
-    original:
-      'https://cdn.pixabay.com/photo/2019/05/14/22/05/container-4203677_1280.jpg',
-    description: 'Container Haulage Freight',
-  },
-  {
-    preview:
-      'https://cdn.pixabay.com/photo/2019/05/16/09/47/beach-4206785__340.jpg',
-    original:
-      'https://cdn.pixabay.com/photo/2019/05/16/09/47/beach-4206785_1280.jpg',
-    description: 'Aerial Beach View',
-  },
-  {
-    preview:
-      'https://cdn.pixabay.com/photo/2016/11/18/16/19/flowers-1835619__340.jpg',
-    original:
-      'https://cdn.pixabay.com/photo/2016/11/18/16/19/flowers-1835619_1280.jpg',
-    description: 'Flower Blooms',
-  },
-  {
-    preview:
-      'https://cdn.pixabay.com/photo/2018/09/13/10/36/mountains-3674334__340.jpg',
-    original:
-      'https://cdn.pixabay.com/photo/2018/09/13/10/36/mountains-3674334_1280.jpg',
-    description: 'Alpine Mountains',
-  },
-  {
-    preview:
-      'https://cdn.pixabay.com/photo/2019/05/16/23/04/landscape-4208571__340.jpg',
-    original:
-      'https://cdn.pixabay.com/photo/2019/05/16/23/04/landscape-4208571_1280.jpg',
-    description: 'Mountain Lake Sailing',
-  },
-  {
-    preview:
-      'https://cdn.pixabay.com/photo/2019/05/17/09/27/the-alps-4209272__340.jpg',
-    original:
-      'https://cdn.pixabay.com/photo/2019/05/17/09/27/the-alps-4209272_1280.jpg',
-    description: 'Alpine Spring Meadows',
-  },
-  {
-    preview:
-      'https://cdn.pixabay.com/photo/2019/05/16/21/10/landscape-4208255__340.jpg',
-    original:
-      'https://cdn.pixabay.com/photo/2019/05/16/21/10/landscape-4208255_1280.jpg',
-    description: 'Nature Landscape',
-  },
-  {
-    preview:
-      'https://cdn.pixabay.com/photo/2019/05/17/04/35/lighthouse-4208843__340.jpg',
-    original:
-      'https://cdn.pixabay.com/photo/2019/05/17/04/35/lighthouse-4208843_1280.jpg',
-    description: 'Lighthouse Coast Sea',
-  },
-];
-
+import galleryItems from './array.js'
 
 
 const gallerylistEl = document.querySelector('.js-gallery');
@@ -72,12 +7,12 @@ const gallerylistEl = document.querySelector('.js-gallery');
 const galleryMarkup = createGalleryList(galleryItems);
 // console.log(galleryMarkup);
 
-gallerylistEl.insertAdjacentHTML( 'beforeend', galleryMarkup);
+gallerylistEl.insertAdjacentHTML('beforeend', galleryMarkup);
 
 function createGalleryList(item) {
-    return item
-        .map(({ preview, original, description }) => {
-            return `
+  return item
+    .map(({ preview, original, description }) => {
+      return `
         <li class="gallery__item">
   <a
     class="gallery__link"
@@ -92,8 +27,8 @@ function createGalleryList(item) {
   </a>
 </li>
 `;
-        })
-        .join('');
+    })
+    .join('');
 }
 
 
@@ -103,7 +38,7 @@ function createGalleryList(item) {
 
 const divBoxEl = document.querySelector('.js-lightbox');
 const imgEl = document.querySelector('img.lightbox__image')
- 
+
 
 
 
@@ -112,58 +47,87 @@ gallerylistEl.addEventListener('click', onImageClick);
 
 
 
+
 // divBoxEl.addEventListener('click', onOpenModal);
-  
+
 
 
 // function changeSrcImg(evt) {
-  
 
-  
+
+
 // }
 
 function onImageClick(evt) {
+  evt.preventDefault();
   if (evt.target.nodeName !== 'IMG') {
-    return ;
+    return;
   }
- evt.target.setAttribute('src' , evt.target.getAttribute(['data-source']))
 
-  evt.target.src = ''; 
-
+  const url = evt.target.getAttribute(['data-source']);
   divBoxEl.classList.add('is-open');
+  imgEl.setAttribute('src', url);
 
-  
+  // evt.target.src = ''; 
+
 }
 
-// function onOpenModal(evt) {
+const closeButton = document.querySelector('.lightbox__button')
+closeButton.addEventListener('click', onCloseModalClick);
 
-//   evt.currentTarget.classList.add('is-open');
+function onCloseModalClick() {
+  divBoxEl.classList.remove('is-open');
+  imgEl.setAttribute('src', '')
 
-// }
-
-
-
-// function onImageClick(evt) {
-// const isGalleryImageEl = evt.target.classList.contains('gallery__image');
-
-//   if (!isGalleryImageEl) {
-//     return   ;
-//   }
-//   console.log(evt.target);
-  
-// }
+}
 
 
+const backdropModalClose = document.querySelector('.lightbox__overlay')
+backdropModalClose.addEventListener('click', onBackdropClick);
+
+function onBackdropClick(evt) {
+  if (evt.currentTarget === evt.target) {
+    onCloseModalClick()
+  }
+}
+
+document.addEventListener('keydown', (evt) => {
+  if (evt.key === 'Escape') {
+    onCloseModalClick()
+  }
+})
+const slideImgEl = document.querySelector('.lightbox__content');
+
+document.addEventListener('keydown', (evt) => {
+  console.log(evt);
+  if (evt.key === 'ArrowLeft') {
+    swipeLeft(galleryItems)
+  }
+  if (evt.key === 'ArrowRight') {
+    swipeRight(galleryItems)
+  }
+})
 
 
-// const buttonCloseEl = document.querySelector('[data-action="close-lightbox"]');
-// const backdropEl = document.querySelector('.lightbox__overlay ');
-// const imgOpenEl = gallerylistEl.querySelector('img');
-  // const divBoxEl = document.querySelector('.js-lightbox');
 
-// addEventListener('click', onOpenModal);
-// function onOpenModal() {
+function swipeLeft(galleryItems) {
+  for (let index = 0; index < galleryItems.length; index++) {
+    const elementGallery = galleryItems[index];
+    if (elementGallery.original === imgEl.getAttribute("src") && index !== 0) {
+      imgEl.setAttribute('src', galleryItems[(index - 1)].original);
+      imgEl.setAttribute('alt', galleryItems[(index - 1)].description);
+    };
+  };
 
-//   document.divBoxEl.classList.add('is-open');
-// }
-  
+};
+
+function swipeRight(galleryItems) {
+  for (let index = 0; index < galleryItems.length; index++) {
+    const elementGallery = galleryItems[index];
+    if (elementGallery.original === imgEl.getAttribute("src") && index !== (galleryItems.length - 1)) {
+      imgEl.setAttribute('src', galleryItems[(index + 1)].original);
+      imgEl.setAttribute('alt', galleryItems[(index + 1)].description);
+      break;
+    };
+  };
+};
