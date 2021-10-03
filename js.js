@@ -2,10 +2,10 @@ import galleryItems from './array.js'
 
 
 const gallerylistEl = document.querySelector('.js-gallery');
-// console.log(gallerylistEl);
+
 
 const galleryMarkup = createGalleryList(galleryItems);
-// console.log(galleryMarkup);
+
 
 gallerylistEl.insertAdjacentHTML('beforeend', galleryMarkup);
 
@@ -48,16 +48,6 @@ gallerylistEl.addEventListener('click', onImageClick);
 
 
 
-// divBoxEl.addEventListener('click', onOpenModal);
-
-
-
-// function changeSrcImg(evt) {
-
-
-
-// }
-
 function onImageClick(evt) {
   evt.preventDefault();
   if (evt.target.nodeName !== 'IMG') {
@@ -68,7 +58,7 @@ function onImageClick(evt) {
   divBoxEl.classList.add('is-open');
   imgEl.setAttribute('src', url);
 
-  // evt.target.src = ''; 
+
 
 }
 
@@ -115,8 +105,9 @@ function swipeLeft(galleryItems) {
   for (let index = 0; index < galleryItems.length; index++) {
     const elementGallery = galleryItems[index];
     if (elementGallery.original === imgEl.getAttribute("src") && index !== 0) {
-      imgEl.setAttribute('src', galleryItems[(index - 1)].original);
-      imgEl.setAttribute('alt', galleryItems[(index - 1)].description);
+            const galleryItemsLeft = galleryItems[(index - 1)];
+          setAttributeSlideLeft (galleryItemsLeft)
+  
     };
   };
 
@@ -126,9 +117,21 @@ function swipeRight(galleryItems) {
   for (let index = 0; index < galleryItems.length; index++) {
     const elementGallery = galleryItems[index];
     if (elementGallery.original === imgEl.getAttribute("src") && index !== (galleryItems.length - 1)) {
-      imgEl.setAttribute('src', galleryItems[(index + 1)].original);
-      imgEl.setAttribute('alt', galleryItems[(index + 1)].description);
+      const galleryItemsRight = galleryItems[(index + 1)]
+      setAttributeSlideRight(galleryItemsRight);
+  
       break;
     };
   };
 };
+
+function setAttributeSlideLeft(evt) {
+      imgEl.setAttribute('src', evt.original);
+      imgEl.setAttribute('alt', evt.description);
+}
+
+function setAttributeSlideRight(evt) {
+     imgEl.setAttribute('src', evt.original);
+      imgEl.setAttribute('alt', evt.description);
+  
+}
