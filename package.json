@@ -1,0 +1,32 @@
+{
+  "dependencies": {
+    "gh-pages": "^3.2.3",
+    "shortid": "^2.2.16"
+  },
+  "name": "goit-js-hw-08-gallery",
+  "version": "1.0.0",
+  "main": "array.js",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.5",
+    "parcel-plugin-nuke-dist": "^1.0.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "parcel index.html",
+    "build": "parcel build index.html --public-url /goit-js-hw-08-gallery/",
+    "deploy": "gh-pages -d dist",
+    "predeploy": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yborline/goit-js-hw-08-gallery.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Yborline/goit-js-hw-08-gallery/issues"
+  },
+  "homepage": "https://Yborline.github.io/goit-js-hw-08-gallery",
+  "description": ""
+}
